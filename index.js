@@ -2,6 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const multer = require("multer");
 
+const path = require("path");
+
+
 const app = express();
 const upload = multer();
 
@@ -18,10 +21,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.static("css"));
 app.use(express.static("public"));
-app.use(express.static("views"));
-
 
 const listener = app.listen(process.env.PORT || 3000, () => {
   console.log(`Your app is listening on port ${listener.address().port}`);
@@ -29,19 +29,19 @@ const listener = app.listen(process.env.PORT || 3000, () => {
   
 
 app.get("/", (request, response) => {
-  response.sendFile(`${__dirname}/views/index.html`);
+  response.sendFile(path.join(__dirname,"views","index.html"));
 });
 
 app.get("/ex1", (request, response) => {
-  response.sendFile(`${__dirname}/views/ex1.html`);
+  response.sendFile(path.join(__dirname,"views","ex1.html"));
 });
 
 app.get("/ex2", (request, response) => {
-  response.sendFile(`${__dirname}/views/ex2.html`);
+  response.sendFile(path.join(__dirname, "views", "ex2.html"));
 });
 
 app.get("/ex3", (request, response) => {
-  response.sendFile(`${__dirname}/views/ex3.html`);
+  response.sendFile(path.join(__dirname,"views","ex3.html"));
 });
 
 app.post("/ex1", upload.array(), (request, response) => {

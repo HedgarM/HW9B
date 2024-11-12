@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const multer = require("multer");
 
 const app = express();
-const port = 3000;
 const upload = multer();
 
 app.use(express.json());
@@ -22,9 +21,10 @@ app.use((req, res, next) => {
 app.use(express.static("css"));
 app.use(express.static("public"));
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
-});
+const listener = app.listen(process.env.PORT || 3000, () => {
+  console.log(`Your app is listening on port ${listener.address().port}`);
+  });
+  
 
 app.get("/", (request, response) => {
   response.sendFile(`${__dirname}/views/index.html`);

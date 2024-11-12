@@ -23,10 +23,10 @@ app.use((req, res, next) => {
 
 app.use(express.static("public"));
 
-const listener = app.listen(process.env.PORT || 3000, () => {
-  console.log(`Your app is listening on port ${listener.address().port}`);
-  });
-  
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Your app is listening on port ${PORT}`);
+});
 
 app.get("/", (request, response) => {
   response.sendFile(path.join(__dirname,"views","index.html"));
